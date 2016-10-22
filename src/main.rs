@@ -131,20 +131,21 @@ fn enums() {
 	let b = instructors.pop();
 	println!("b is {:?}", b);
 
-	let a = Some("Carol");
+	//let b: Option<&str> = None; // equivalent of above
 
-	let name = a.expect("No name present");
-	println!("Name is {} bytes long", name.len());
-
-	let b: Option<&str> = None;
-
-	match b {
+	match a {
 		Some(name) => {
 			println!("Other name is {} bytes long", name.len())
 		},
 		None => {
-			println!("No name!")
+			panic!("No name!") // equivalent of below expect, panic is special so not return, also see unimplemented! and unreachable! (we know that this isn't going to be reachable)
 		}
 	}
+
+	//let a = Some("Carol"); // opton of type string, value is the some variant of the enum 
+	// Option::Some equivalent 
+
+	let name = a.expect("No name present"); //panics with this message if a is None 
+	println!("Name is {} bytes long", name.len());
 }
 
