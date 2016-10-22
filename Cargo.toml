@@ -1,6 +1,6 @@
 [package]
 name = "rustbridge"
 version = "0.1.0"
-authors = ["annafilippova"]
+authors = ["annafilippova <annafil@gmail.com>"]
 
 [dependencies]
