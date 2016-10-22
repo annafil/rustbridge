@@ -33,6 +33,8 @@ fn main() { //can't have 2 mains
 
     enums();
 
+    strings();
+
 }
 
 // each part of if condition, if it was in function, would have to return the same type in order to not get errors
@@ -147,5 +149,73 @@ fn enums() {
 
 	let name = a.expect("No name present"); //panics with this message if a is None 
 	println!("Name is {} bytes long", name.len());
+
+	// result is another enum for when something succeeds or fails, no try catch begin rescue ends, this is how you do it in rust -- handle OK and error case
+
+	let numstr = "6";
+	let num = numstr.parse::<i32>(); // turbofish, this is explicitly typed numeric 
+	// anything that could produce a result and fail will return a "Result"
+	println!("num = {:?}", num);
+
+	let numstr = "florp";
+	let num = numstr.parse::<i32>();
+	println!("num = {:?}", num); // prints Err parse error 
+
+	//let num = num.expect("should have a number");
+
+	//println!("num + 5 {}", num + 5);
+
+	let answer = match num {
+		Ok(n) => n + 5,
+		Err(_) => 0,
+	};
+	println!("Answer is {}", answer);
+
+	println!("{:?}", add_five_to_string("five".to_string()));
+	println!("{:?}", add_five_to_string("5".to_string()));
+
+}
+
+fn add_five_to_string(s: String) -> Result<i32, std::num::ParseIntError> {
+
+	match s.parse::<i32>() {
+		Ok(val) => Ok(val + 5),
+		Err(e) => Err(e), // will continue to run, just letting you know of the failure 
+	}
+	//let ans = try!(s.parse::<i32>()) + 5; same as above match condition can only be used in Result returning methods; in future will be just ? 
+	//Ok(ans)
+}
+
+fn strings() {
+	// two string types
+
+	println!("{}", fizz(5));
+
+	let v = vec![1, 2, 3, 4, 5];
+	let piece = &v[2..]; //range after 2, can't do inclusive ranges 
+
+	// 4 types of ranges, all exclusive, includes start but not end 
+	// (2..4)
+	// (2..)
+	// (..4)
+	// (..)
+	println!("piece of v = {:?}", piece);
+	println!("piece of v = {:p}", piece); //memory location 
+
+	//string slices 
+
+	let s = String::from("Call me Ishmael blah blah...");
+	let part = &s[0..4];
+	println!("part is '{}'", part); //this is "Call", starts at byte, for english and utf8 char and bytes match up, but if emoji or accents then not the same 
+
+
+}
+
+fn fizz(num: u32) -> String {
+    if num % 3 == 0 {
+        "Fizz".into() // will figure out the type, otherwise to_string() or String::from("slice")
+    } else {
+        num.to_string()
+    }
 }
 
