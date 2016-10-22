@@ -14,15 +14,19 @@ fn main() { //can't have 2 mains
     let movie_age = 17u32; // unsigned, positive 32bit, rust style to underscore multiple words, snake case warning
 
     if movie_age < 13 {
-    	println!("You may see G or PG Movies");
+    	println!("You are {} years old. You may see G or PG Movies", movie_age);
     } else if movie_age < 17 {
-    	println!("You may see G, PG, or PG-13 movies");
+    	println!("You are {} years old. You may see G, PG, or PG-13 movies", movie_age);
     } else {
-    	println!("You are old.");
+    	println!("You are {} years old.", movie_age);
     	println!("You may see G, PG, PG-13, or R movies");
     }
 
     match_function(2);
+
+    let mut color = [255, 0, 255]; // fixed count of items, only have 3 items always
+    color[0] = 100;
+    println!("The color is {:?}", color);
 }
 
 // each part of if condition, if it was in function, would have to return the same type in order to not get errors
@@ -31,11 +35,12 @@ fn main() { //can't have 2 mains
 
 fn match_function(n :u32) { // no return because not returning things, just printing 
 	match n {
-		0...12 => println!("You may see G or PG Movies"),
-		13...16 => println!("You may see G, PG, or PG-13 Movies"),
-		_ => {
-			println!("You are old");
-			println!("You may see G, PG, PG-13 or R movies");
+		0...12 => println!("You are {} years old. You may see G or PG Movies", n),
+		13...16 => println!("You are {} years old. You may see G, PG, or PG-13 Movies", n),
+		_ => { // if you don't have this, will throw an error, you have to explicitly specify all cases 
+			println!("You are {} years old. You are old", n);
+			println!("You are {} years old. You may see G, PG, PG-13 or R movies", n);
 		},
 	}
 }
+
