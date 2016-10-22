@@ -22,11 +22,19 @@ fn main() { //can't have 2 mains
     	println!("You may see G, PG, PG-13, or R movies");
     }
 
+    // panic!("Aaaaaa!"); this will end program and panic 
+
     match_function(2);
 
-    let mut color = [255, 0, 255]; // fixed count of items, only have 3 items always
-    color[0] = 100;
-    println!("The color is {:?}", color);
+    let color = [255, 0, 255]; // fixed count of items, only have 3 items always
+    println!("The color is {:?}", color[0]); // :? print variable with debugging format, previously display format, there is no display for arrays :#? pretty debug  
+
+    //most of the time you want a vector rather than array 
+    let mut prices = vec![30,100,2];
+    prices[0] = 25;
+    prices.push(40);
+    println!("All prices are: {:#?}", prices) // pretty debug will put on each line
+
 }
 
 // each part of if condition, if it was in function, would have to return the same type in order to not get errors
