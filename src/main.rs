@@ -35,6 +35,8 @@ fn main() { //can't have 2 mains
 
     strings();
 
+    ownership();
+
 }
 
 // each part of if condition, if it was in function, would have to return the same type in order to not get errors
@@ -219,3 +221,28 @@ fn fizz(num: u32) -> String {
     }
 }
 
+fn ownership() {
+
+	let v = vec![1, 2, 3];
+	let v2 = vec![1, 2, 3];
+
+	print_vec(v);
+	//print_vec(v); // no more v, you've given it away 
+
+	print_vec2(&v2[..]);
+	print_vec2(&v2[..]);
+
+	let mut v = vec![1, 2, 3];
+	let f = &v[0];
+	//v.clear();
+	println!("What would f be? {}", f); // cannot borrow `v` as mutable because it is also borrowed as immutable
+
+} //immutable borrow ends here... 
+
+fn print_vec(v: Vec<i32>) { // When you pass an argument to a function, ownership is transferred to the function. We say that something is moved... 
+    println!("v is {:?}", v);
+}
+
+fn print_vec2(v2: &[i32]) { // this is a reference, to a single number would look like &i32, then use &v[1]
+    println!("v2 is {:?}", v2);
+}
