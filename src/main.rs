@@ -53,6 +53,19 @@ fn main() { //can't have 2 mains
 
     //loop is an infinite loop, while, break exists the current loop
 
+    for i in (0..10).filter(|x| x % 2 == 0) { // keeps what matches
+    	println!("filter = {}", i);
+    }
+
+
+    for i in (0..10).map(|x| x * x) { 
+    	println!("map = {}", i);
+    }
+
+    let sum = (0..10).fold(0, |acc,x| acc + x); // reduce, accumulator, starting at base value pass accumulator value iterating over, value inside block will be returned
+    println!("sum = {}", sum);
+    println!("sum = {}", (0..10).sum::<i32>()); //how does this typing work? 
+
 }
 
 // each part of if condition, if it was in function, would have to return the same type in order to not get errors
