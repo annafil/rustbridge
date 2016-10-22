@@ -30,10 +30,20 @@ fn main() { //can't have 2 mains
     println!("The color is {:?}", color[0]); // :? print variable with debugging format, previously display format, there is no display for arrays :#? pretty debug  
 
     //most of the time you want a vector rather than array 
-    let mut prices = vec![30,100,2];
+    let mut prices = vec![30,100,2]; // mutating = borrowing, can't add new value without mut, must be same type, infer type from the first one
     prices[0] = 25;
     prices.push(40);
-    println!("All prices are: {:#?}", prices) // pretty debug will put on each line
+    println!("All prices are: {:#?}", prices); // pretty debug will put on each line
+
+    for i in 0..10 { // exclusive range 
+    	println!("NUmber {}", i);
+    }
+
+    let names = vec!["Carol", "Jake", "Marylou", "Bruce"];
+
+    for name in names.iter() {
+    	println!("Hi {}!", name);
+    }
 
 }
 
