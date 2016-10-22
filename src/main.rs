@@ -41,9 +41,17 @@ fn main() { //can't have 2 mains
 
     let names = vec!["Carol", "Jake", "Marylou", "Bruce"];
 
-    for name in names.iter() {
-    	println!("Hi {}!", name);
+    let name  = "Question"; // this is not the same name as inside the loop 
+
+    for name in names.iter() { // no variable name after the loop
+    	println!("Hi {}!", name); //can access vars outside the for loop
+    	age = add_fifty(age);
+    	println!("{}", age);
     }
+
+    println!("name {}", name); // prints original name 
+
+    //loop is an infinite loop, while, break exists the current loop
 
 }
 
